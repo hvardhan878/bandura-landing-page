@@ -2,14 +2,14 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "Privacy Policy for Dosa - Learn how we collect, use, and protect your information when using our AI-powered underwriting tools.",
+  description: "Privacy Policy for Bandura - Learn how we collect, use, and protect your information when using our capture planning and bid management tools.",
   alternates: {
-    canonical: "https://usedosa.com/privacy",
+    canonical: "https://bandurai.com/privacy",
   },
   openGraph: {
-    title: "Privacy Policy | Dosa",
-    description: "Privacy Policy for Dosa - Learn how we collect, use, and protect your information when using our AI-powered underwriting tools.",
-    url: "https://usedosa.com/privacy",
+    title: "Privacy Policy | Bandura",
+    description: "Privacy Policy for Bandura - Learn how we collect, use, and protect your information when using our capture planning and bid management tools.",
+    url: "https://bandurai.com/privacy",
   },
 }
 
@@ -22,13 +22,13 @@ export default function PrivacyPolicy() {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://usedosa.com",
+        item: "https://bandurai.com",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Privacy Policy",
-        item: "https://usedosa.com/privacy",
+        item: "https://bandurai.com/privacy",
       },
     ],
   }
@@ -54,7 +54,7 @@ export default function PrivacyPolicy() {
         <div className="space-y-8 text-gray-300 leading-relaxed">
           <section>
             <p className="mb-6">
-              This Privacy Policy explains how DOSA ("the App", "we", "us", or "our") collects, uses, stores, and protects information when you use our services. The App provides tools for automated email review, document analysis, and AI-assisted workflows for business and professional use.
+              This Privacy Policy explains how Bandura ("the App", "we", "us", or "our") collects, uses, stores, and protects information when you use our services. The App provides tools for capture planning, bid management, win probability analysis, competitor intelligence, and AI-assisted workflows for business and professional use.
             </p>
             <p>
               By using the App, you agree to the practices described in this Privacy Policy.
@@ -265,7 +265,7 @@ export default function PrivacyPolicy() {
               If you have questions about this Privacy Policy or data practices, please contact:
             </p>
             <ul className="list-none space-y-2 ml-4">
-              <li>Email: <a href="mailto:hello@usedosa.com" className="text-white hover:text-purple-300 underline">hello@usedosa.com</a></li>
+              <li>Email: <a href="mailto:hello@bandurai.com" className="text-white hover:text-purple-300 underline">hello@bandurai.com</a></li>
             </ul>
           </section>
         </div>

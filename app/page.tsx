@@ -12,6 +12,51 @@ export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   useEffect(() => {
+    // #region agent log - scroll diagnostics
+    const ua = navigator.userAgent;
+    const isChrome = /Chrome\/(\d+)/.test(ua);
+    const chromeVer = isChrome ? Number(ua.match(/Chrome\/(\d+)/)?.[1]) : null;
+    console.group('[Bandura Scroll Debug]');
+    console.log('UA:', ua);
+    console.log('Chrome:', isChrome, 'v' + chromeVer);
+    console.log('html overflow:', getComputedStyle(document.documentElement).overflow);
+    console.log('body overflow:', getComputedStyle(document.body).overflow);
+    console.log('html overscroll-behavior:', getComputedStyle(document.documentElement).overscrollBehavior);
+    console.log('Scroll container: window.scrollY works?', typeof window.scrollY === 'number');
+
+    let scrollFired = false;
+    const onScroll = () => {
+      if (!scrollFired) {
+        console.log('[Bandura Scroll Debug] ✅ window scroll fired — scrollY:', window.scrollY);
+        scrollFired = true;
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    let wheelFired = false;
+    const onWheel = (e: WheelEvent) => {
+      if (!wheelFired) {
+        console.log('[Bandura Scroll Debug] Wheel event — deltaY:', e.deltaY, 'defaultPrevented:', e.defaultPrevented, 'cancelable:', e.cancelable);
+        wheelFired = true;
+      }
+    };
+    window.addEventListener('wheel', onWheel, { passive: true });
+
+    // After 3s check if any scroll happened
+    const timer = setTimeout(() => {
+      console.log('[Bandura Scroll Debug] After 3s — scrollY:', window.scrollY, 'scroll fired:', scrollFired);
+      console.groupEnd();
+    }, 3000);
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('wheel', onWheel);
+      clearTimeout(timer);
+    };
+    // #endregion
+  }, [])
+
+  useEffect(() => {
     // Add BreadcrumbList structured data
     const breadcrumbSchema = {
       "@context": "https://schema.org",
@@ -37,7 +82,7 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-black text-white font-sans selection:bg-purple-500/30 overflow-x-hidden" style={{ transform: 'translateZ(0)' }}>
+    <div className="min-h-screen bg-black text-white font-sans selection:bg-purple-500/30 overflow-x-hidden">
       
       {/* Header Navigation */}
       <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-8 py-6 max-w-7xl mx-auto w-full">
@@ -52,7 +97,7 @@ export default function Home() {
         </div>
 
         {/* Navigation - Glass UI */}
-        <nav className="hidden md:flex items-center gap-1 rounded-full border border-white/10 bg-white/5 p-1 backdrop-blur-md" style={{ transform: 'translateZ(0)' }}>
+        <nav className="hidden md:flex items-center gap-1 rounded-full border border-white/10 bg-white/5 p-1 backdrop-blur-md">
             <a
               href="#features"
               className="text-white/90 hover:text-white text-sm font-medium px-6 py-2.5 rounded-full hover:bg-white/10 transition-all duration-200"
