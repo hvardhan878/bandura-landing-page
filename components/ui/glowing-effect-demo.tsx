@@ -11,31 +11,31 @@ export function GlowingEffectDemo() {
         area="md:[grid-area:1/1/2/7] xl:[grid-area:1/1/2/5]"
         icon={<Target className="h-4 w-4" />}
         title="Win probability analysis"
-        description="Automated analysis of your win probability based on competitor positioning, past performance, and market intelligence."
+        description="Assess your likelihood of winning before the ITT exists. Bandura analyses competitor positioning, past performance, and market signals to give you months of strategic advantage."
       />
       <GridItem
         area="md:[grid-area:1/7/2/13] xl:[grid-area:2/1/3/5]"
         icon={<Users className="h-4 w-4" />}
         title="Competitor intelligence"
-        description="Comprehensive competitor matrices showing who's bidding, their strengths, weaknesses, and historical win rates."
+        description="Know exactly who you're up against before they know you're watching. Bandura builds live competitor matrices covering strengths, weaknesses, and historical win rates across your target pipeline."
       />
       <GridItem
         area="md:[grid-area:2/1/3/7] xl:[grid-area:1/5/3/8]"
         icon={<FileText className="h-4 w-4" />}
         title="Full capture plans"
-        description="Complete capture plans with stakeholder mapping, win themes, and strategic recommendations 6-9 months before ITT."
+        description="Bandura generates complete capture plans — stakeholder maps, win themes, and strategic recommendations — fully automated and available on every bid, 6–9 months before ITT."
       />
       <GridItem
         area="md:[grid-area:2/7/3/13] xl:[grid-area:1/8/2/13]"
         icon={<Cloud className="h-4 w-4" />}
-        title="M365/SharePoint integration"
-        description="Works seamlessly with your existing Microsoft 365 and SharePoint environments. No new infrastructure required."
+        title="Built for M365 & SharePoint"
+        description="No new infrastructure. No migrations. Bandura deploys directly into your existing Microsoft 365 and SharePoint environment so your bid teams work exactly where they already do."
       />
       <GridItem
         area="md:[grid-area:3/1/4/13] xl:[grid-area:2/8/3/13]"
         icon={<Shield className="h-4 w-4" />}
-        title="No knowledge loss"
-        description="Unlike consultants who leave, Bandura preserves all capture planning knowledge and makes it available on every bid."
+        title="Institutional knowledge, retained"
+        description="When consultants leave, their insight goes with them. Bandura captures and preserves every capture planning decision, making that knowledge available on every future bid."
       />
     </ul>
   );

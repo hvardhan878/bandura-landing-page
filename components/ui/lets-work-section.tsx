@@ -59,7 +59,7 @@ export function LetsWorkTogether() {
                 transitionDelay: "100ms",
               }}
             >
-              Ready to get started
+              Start winning earlier
             </span>
             <h3
               className="text-3xl font-light tracking-tight text-white transition-all duration-500 sm:text-4xl"
@@ -268,9 +268,9 @@ export function LetsWorkTogether() {
           }}
         >
           <p className="max-w-md text-sm leading-relaxed text-gray-400">
-            Start capture planning 6 months before your competitors. Increase win rates, reduce cost per bid, and improve your ability to predict and qualify opportunities.
+            See how Bandura helps UK IT consulting firms win more £50M+ public sector contracts — with less cost, less guesswork, and a strategic edge months before the ITT drops.
           </p>
-          <span className="text-xs tracking-widest uppercase text-gray-400/60">Request Demo</span>
+          <span className="text-xs tracking-widest uppercase text-gray-400/60">30-min intro call</span>
         </div>
       </div>
     </section>
