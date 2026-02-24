@@ -164,3 +164,13 @@
     transform: rotate(360deg);
   }
 }
+
+/* Custom shadows for orbital timeline */
+.shadow-orbital {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+/* Custom gradients for orbital timeline */
+.bg-gradient-orbital {
+  background: linear-gradient(to bottom right, #6366f1, #3b82f6, #14b8a6);
+}

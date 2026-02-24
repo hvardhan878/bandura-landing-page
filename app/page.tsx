@@ -7,6 +7,8 @@ import { SplineSceneBasic } from "@/components/ui/demo"
 import { GlowingEffectDemo } from "@/components/ui/glowing-effect-demo"
 import { LetsWorkTogether } from "@/components/ui/lets-work-section"
 import { cn } from "@/lib/utils"
+import RadialOrbitalTimeline from "@/components/ui/radial-orbital-timeline"
+import { Search, FileText, BarChart2, Target, Rocket } from "lucide-react"
 
 export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -213,6 +215,19 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Radial Orbital Timeline Section */}
+      <section className="bg-black relative">
+        <div className="container mx-auto px-6 pt-16 pb-4 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight text-white">
+            How Bandura works
+          </h2>
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+            From market intelligence to winning submission — explore each stage of our AI-powered bid strategy engine.
+          </p>
+        </div>
+        <RadialOrbitalTimeline timelineData={banduraTimelineData} />
+      </section>
+
       {/* Trusted By Section */}
       <section className="py-16 bg-black relative">
         <div
@@ -353,6 +368,64 @@ export default function Home() {
     </div>
   )
 }
+
+const banduraTimelineData = [
+  {
+    id: 1,
+    title: "Market Scan",
+    date: "Step 1",
+    content: "Bandura continuously monitors procurement portals, contract notices, and competitor activity to surface the highest-value opportunities for your team.",
+    category: "Intelligence",
+    icon: Search,
+    relatedIds: [2],
+    status: "completed" as const,
+    energy: 100,
+  },
+  {
+    id: 2,
+    title: "Qualification",
+    date: "Step 2",
+    content: "Our AI scores each opportunity against your win criteria — past performance, resource fit, and competitive landscape — so you bid only on deals you can win.",
+    category: "Analysis",
+    icon: Target,
+    relatedIds: [1, 3],
+    status: "completed" as const,
+    energy: 90,
+  },
+  {
+    id: 3,
+    title: "Intel Synthesis",
+    date: "Step 3",
+    content: "Bandura aggregates documents, RFPs, and prior submissions into a structured intelligence brief, cutting research time from weeks to hours.",
+    category: "Research",
+    icon: FileText,
+    relatedIds: [2, 4],
+    status: "in-progress" as const,
+    energy: 70,
+  },
+  {
+    id: 4,
+    title: "Strategy Build",
+    date: "Step 4",
+    content: "Generate differentiated win themes, pricing narratives, and competitive positioning backed by data — months before submission deadlines.",
+    category: "Strategy",
+    icon: BarChart2,
+    relatedIds: [3, 5],
+    status: "pending" as const,
+    energy: 45,
+  },
+  {
+    id: 5,
+    title: "Submission",
+    date: "Step 5",
+    content: "Deliver polished, compliant proposals with AI-assisted drafting, review workflows, and deadline tracking baked in.",
+    category: "Execution",
+    icon: Rocket,
+    relatedIds: [4],
+    status: "pending" as const,
+    energy: 20,
+  },
+]
 
 const logos = [
   {
