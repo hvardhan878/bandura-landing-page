@@ -7,10 +7,10 @@ export function Features() {
             <div className="mx-auto max-w-3xl lg:max-w-5xl px-6">
                 <div className="mb-12 text-center">
                     <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight text-white">
-                        Built for enterprise bid teams
+                        Built for enterprise consultancies
                     </h2>
                     <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-                        Everything your team needs to qualify faster, strategise smarter, and submit with confidence.
+                        Everything your team needs to qualify faster, strategise smarter, and win strategically.
                     </p>
                 </div>
                 <div className="relative">

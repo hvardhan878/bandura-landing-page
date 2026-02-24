@@ -13,8 +13,16 @@ interface TimelineItem {
   category: string;
   icon: React.ElementType;
   relatedIds: number[];
-  status: "completed" | "in-progress" | "pending";
+  status:
+    | "completed"
+    | "in-progress"
+    | "pending"
+    | "analysed"
+    | "modelled"
+    | "documented"
+    | "identified";
   energy: number;
+  energyLabel?: string;
 }
 
 interface RadialOrbitalTimelineProps {
@@ -152,8 +160,37 @@ export default function RadialOrbitalTimeline({
         return "text-black bg-white border-black";
       case "pending":
         return "text-white bg-black/40 border-white/50";
+      case "analysed":
+        return "text-white bg-black border-white";
+      case "modelled":
+        return "text-white bg-black border-white";
+      case "documented":
+        return "text-white bg-black border-white";
+      case "identified":
+        return "text-white bg-black border-white";
       default:
         return "text-white bg-black/40 border-white/50";
+    }
+  };
+
+  const getStatusLabel = (status: TimelineItem["status"]): string => {
+    switch (status) {
+      case "completed":
+        return "COMPLETE";
+      case "in-progress":
+        return "IN PROGRESS";
+      case "pending":
+        return "PENDING";
+      case "analysed":
+        return "ANALYSED";
+      case "modelled":
+        return "MODELLED";
+      case "documented":
+        return "DOCUMENTED";
+      case "identified":
+        return "DOCUMENTED";
+      default:
+        return "PENDING";
     }
   };
 
@@ -268,11 +305,7 @@ export default function RadialOrbitalTimeline({
                             item.status
                           )}`}
                         >
-                          {item.status === "completed"
-                            ? "COMPLETE"
-                            : item.status === "in-progress"
-                            ? "IN PROGRESS"
-                            : "PENDING"}
+                          {getStatusLabel(item.status)}
                         </Badge>
                         <span className="text-xs font-mono text-white/50">
                           {item.date}
@@ -289,14 +322,14 @@ export default function RadialOrbitalTimeline({
                         <div className="flex justify-between items-center text-xs mb-1">
                           <span className="flex items-center">
                             <Zap size={10} className="mr-1" />
-                            Energy Level
+                            {item.energyLabel || "Energy Level"}
                           </span>
-                          <span className="font-mono">{item.energy}%</span>
+                          <span className="font-mono">{item.energy >= 0 ? `${item.energy}%` : `${item.energy}%`}</span>
                         </div>
                         <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden">
                           <div
-                            className="h-full bg-gradient-to-r from-blue-500 to-purple-500"
-                            style={{ width: `${item.energy}%` }}
+                            className={`h-full ${item.energy >= 0 ? 'bg-gradient-to-r from-blue-500 to-purple-500' : 'bg-gradient-to-r from-red-500 to-orange-500'}`}
+                            style={{ width: `${Math.abs(item.energy)}%` }}
                           ></div>
                         </div>
                       </div>
