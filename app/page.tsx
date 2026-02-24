@@ -377,7 +377,7 @@ const banduraTimelineData = [
   {
     id: 1,
     title: "Capture Plan",
-    date: "Step 1",
+    date: "Capture",
     content: "18 Actions to improve win likelihood identified, with total investment requirement of approx £240K",
     category: "Intelligence",
     icon: Search,
@@ -389,7 +389,7 @@ const banduraTimelineData = [
   {
     id: 2,
     title: "Qualification",
-    date: "Step 2",
+    date: "Qualification",
     content: "Possibility of winning with current composition and at avg price point, however low probability. Potential ability to increase possibility up to 90%+ through strategic actions in capture plan.",
     category: "Analysis",
     icon: Target,
@@ -414,7 +414,7 @@ const banduraTimelineData = [
   {
     id: 4,
     title: "Win Strategy",
-    date: "Step 4",
+    date: "Strategy",
     content: "Win strategy generated, with 7 opportunities to begin positioning and driving narrative through",
     category: "Strategy",
     icon: BarChart2,
@@ -426,7 +426,7 @@ const banduraTimelineData = [
   {
     id: 5,
     title: "Comp Risk",
-    date: "Step 1",
+    date: "Comp Risk",
     content: "Three critical threat identified with mitigation paths created, one significant opportunity identified to ghost competitors",
     category: "Execution",
     icon: Rocket,
