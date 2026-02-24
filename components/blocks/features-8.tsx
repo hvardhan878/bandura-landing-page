@@ -26,8 +26,8 @@ export function Features() {
                                     </svg>
                                     <span className="mx-auto block w-fit text-5xl font-semibold text-white">3×</span>
                                 </div>
-                                <h2 className="mt-6 text-center text-3xl font-semibold text-white">Higher win rates</h2>
-                                <p className="mt-3 text-center text-sm text-gray-400">Teams using Bandura win 3× more bids on average within 6 months.</p>
+                                <h2 className="mt-6 text-center text-3xl font-semibold text-white">Lead time</h2>
+                                <p className="mt-3 text-center text-sm text-gray-400">Teams using Bandura can action strategy before any competitors</p>
                             </CardContent>
                         </Card>
                         <Card className="relative col-span-full overflow-hidden sm:col-span-3 lg:col-span-2 bg-zinc-900 border-white/10">
