@@ -9,6 +9,7 @@ import { LetsWorkTogether } from "@/components/ui/lets-work-section"
 import { cn } from "@/lib/utils"
 import RadialOrbitalTimeline from "@/components/ui/radial-orbital-timeline"
 import { Search, FileText, BarChart2, Target, Rocket } from "lucide-react"
+import { Features } from "@/components/blocks/features-8"
 
 export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -320,6 +321,9 @@ export default function Home() {
           </div>
         </div>
       </section> */}
+
+      {/* Features Bento Section */}
+      <Features />
 
       {/* CTA Section */}
       <LetsWorkTogether />
