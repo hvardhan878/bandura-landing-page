@@ -11,13 +11,13 @@ export function GlowingEffectDemo() {
         area="md:[grid-area:1/1/2/7] xl:[grid-area:1/1/2/5]"
         icon={<Target className="h-4 w-4" />}
         title="Win probability analysis"
-        description="Assess your likelihood of winning before the ITT exists. Bandura analyses competitor positioning, past performance, and market signals to give you months of strategic advantage."
+        description="Assess your win possibility and probability before and understand what investments you will need to make to win."
       />
       <GridItem
         area="md:[grid-area:1/7/2/13] xl:[grid-area:2/1/3/5]"
         icon={<Users className="h-4 w-4" />}
-        title="Competitor intelligence"
-        description="Know exactly who you're up against before they know you're watching. Bandura builds live competitor matrices covering strengths, weaknesses, and historical win rates across your target pipeline."
+        title="Improve Bid Position"
+        description="Map all possible strategic avenues, and model their viability and feasibility to understand what key paths will enable you to shape your position to win."
       />
       <GridItem
         area="md:[grid-area:2/1/3/7] xl:[grid-area:1/5/3/8]"
@@ -27,15 +27,15 @@ export function GlowingEffectDemo() {
       />
       <GridItem
         area="md:[grid-area:2/7/3/13] xl:[grid-area:1/8/2/13]"
-        icon={<Cloud className="h-4 w-4" />}
-        title="Built for M365 & SharePoint"
-        description="No new infrastructure. No migrations. Bandura deploys directly into your existing Microsoft 365 and SharePoint environment so your bid teams work exactly where they already do."
+        icon={<Shield className="h-4 w-4" />}
+        title="Know what winning looks like"
+        description="Map the winning positions and understand what that means for your organisation to understand whether you want to win early."
       />
       <GridItem
         area="md:[grid-area:3/1/4/13] xl:[grid-area:2/8/3/13]"
-        icon={<Shield className="h-4 w-4" />}
-        title="Institutional knowledge, retained"
-        description="When consultants leave, their insight goes with them. Bandura captures and preserves every capture planning decision, making that knowledge available on every future bid."
+        icon={<Cloud className="h-4 w-4" />}
+        title="Built for M365 & SharePoint"
+        description="No new infrastructure. No migrations. Bandura deploys directly into your existing Microsoft 365 and SharePoint environment so your bid teams work exactly where they already do."
       />
     </ul>
   );

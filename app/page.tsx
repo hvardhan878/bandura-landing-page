@@ -201,10 +201,10 @@ export default function Home() {
         <div className="container mx-auto px-6">
           <div className="mb-16 max-w-3xl mx-auto text-center">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight text-white">
-              Embed strategy early. Win before the ITT drops.
+              Increase win rates and improve your qualification capabilities.
             </h2>
             <p className="text-lg text-gray-400">
-              Most bid teams engage too late. Bandura automates the strategic decisions that matter 6–9 months before the ITT — giving you the intelligence, alignment, and plans to shape deals before your competitors even know they exist.
+              Most teams are bidding reactively. Bandura automates the analysis required to predict and shape your strategy - giving you the ability to act your strategy months before the competition.
             </p>
           </div>
           <div className="max-w-7xl mx-auto">

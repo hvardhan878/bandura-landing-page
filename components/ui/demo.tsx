@@ -18,7 +18,7 @@ export function SplineSceneBasic() {
             The operating system for winning complex deals
           </h1>
           <p className="mt-6 text-neutral-300 text-lg max-w-lg">
-            Bandura embeds strategic thinking 6–9 months before the ITT drops — automating capture planning, competitor analysis, and win probability so your team bids with conviction, not guesswork.
+            Bandura predicts if you can win, and how you will win complex deals. Then helps you execute your strategy.
           </p>
           <div className="mt-8">
             <a 
