@@ -270,7 +270,7 @@ export function LetsWorkTogether() {
           <p className="max-w-md text-sm leading-relaxed text-gray-400">
             See how Bandura helps UK IT consulting firms win more £50M+ public sector contracts — with less cost, less guesswork, and a strategic edge months before the ITT drops.
           </p>
-          <span className="text-xs tracking-widest uppercase text-gray-400/60">30-min intro call</span>
+          <span className="text-xs tracking-widest uppercase text-gray-400/60">15 min call</span>
         </div>
       </div>
     </section>
