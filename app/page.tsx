@@ -7,9 +7,7 @@ import { SplineSceneBasic } from "@/components/ui/demo"
 import { GlowingEffectDemo } from "@/components/ui/glowing-effect-demo"
 import { LetsWorkTogether } from "@/components/ui/lets-work-section"
 import { cn } from "@/lib/utils"
-import RadialOrbitalTimeline from "@/components/ui/radial-orbital-timeline"
-import { Search, FileText, BarChart2, Target, Rocket } from "lucide-react"
-import { Features } from "@/components/blocks/features-8"
+import BanduraDashboard from "@/components/ui/bandura-dashboard"
 
 export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -199,36 +197,6 @@ export default function Home() {
         <SplineSceneBasic />
       </section>
 
-      {/* Features Grid Section with Glowing Effect */}
-      <section id="features" className="py-24 bg-black relative">
-        <div className="container mx-auto px-6">
-          <div className="mb-16 max-w-3xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight text-white">
-              Increase win rates and improve your qualification capabilities.
-            </h2>
-            <p className="text-lg text-gray-400">
-              Most teams are bidding reactively. Bandura automates the analysis required to predict and shape your strategy - giving you the ability to act your strategy months before the competition.
-            </p>
-          </div>
-          <div className="max-w-7xl mx-auto">
-            <GlowingEffectDemo />
-          </div>
-        </div>
-      </section>
-
-      {/* Radial Orbital Timeline Section */}
-      <section className="bg-black relative">
-        <div className="container mx-auto px-6 pt-16 pb-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight text-white">
-            How Bandura works
-          </h2>
-          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            From market intelligence to winning submission — explore each stage of our AI-powered bid strategy engine.
-          </p>
-        </div>
-        <RadialOrbitalTimeline timelineData={banduraTimelineData} />
-      </section>
-
       {/* Trusted By Section */}
       <section className="py-16 bg-black relative">
         <div
@@ -250,6 +218,23 @@ export default function Home() {
             <div className="mx-auto my-5 h-px max-w-sm bg-gray-700/50 [mask-image:linear-gradient(to_right,transparent,black,transparent)]" />
             <LogoCloud logos={logos} className="py-8" />
             <div className="mt-5 h-px bg-gray-700/50 [mask-image:linear-gradient(to_right,transparent,black,transparent)]" />
+          </div>
+        </div>
+      </section>
+
+      {/* Features Grid Section with Glowing Effect */}
+      <section id="features" className="py-24 bg-black relative">
+        <div className="container mx-auto px-6">
+          <div className="mb-16 max-w-3xl mx-auto text-center">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight text-white">
+              Increase win rates and improve your qualification capabilities.
+            </h2>
+            <p className="text-lg text-gray-400">
+              Most teams are bidding reactively. Bandura automates the analysis required to predict and shape your strategy - giving you the ability to act your strategy months before the competition.
+            </p>
+          </div>
+          <div className="max-w-7xl mx-auto">
+            <GlowingEffectDemo />
           </div>
         </div>
       </section>
@@ -322,8 +307,8 @@ export default function Home() {
         </div>
       </section> */}
 
-      {/* Features Bento Section */}
-      <Features />
+      {/* Bandura Dashboard Demo */}
+      <BanduraDashboard />
 
       {/* CTA Section */}
       <LetsWorkTogether />
@@ -372,70 +357,6 @@ export default function Home() {
     </div>
   )
 }
-
-const banduraTimelineData = [
-  {
-    id: 1,
-    title: "Capture Plan",
-    date: "Capture",
-    content: "18 Actions to improve win likelihood identified, with total investment requirement of approx £240K",
-    category: "Intelligence",
-    icon: Search,
-    relatedIds: [2],
-    status: "analysed" as const,
-    energy: 9,
-    energyLabel: "Win Likelihood Improvement",
-  },
-  {
-    id: 2,
-    title: "Qualification",
-    date: "Qualification",
-    content: "Possibility of winning with current composition and at avg price point, however low probability. Potential ability to increase possibility up to 90%+ through strategic actions in capture plan.",
-    category: "Analysis",
-    icon: Target,
-    relatedIds: [1, 3],
-    status: "modelled" as const,
-    energy: 45,
-    energyLabel: "Win Probability",
-  },
-  {
-    id: 3,
-    title: "Intelligent Decisions",
-    date: "Decisions",
-    content:
-      "There is a 16% chance that competitors positioning will push you to a sub-20% chance of winning. You should only undertake this bid if you are prepared to make the necessary mitigation investments",
-    category: "Research",
-    icon: FileText,
-    relatedIds: [2, 4],
-    status: "identified" as const,
-    energy: 70,
-    energyLabel: "Risk Factor",
-  },
-  {
-    id: 4,
-    title: "Win Strategy",
-    date: "Strategy",
-    content: "Win strategy generated, with 7 opportunities to begin positioning and driving narrative through",
-    category: "Strategy",
-    icon: BarChart2,
-    relatedIds: [3, 5],
-    status: "documented" as const,
-    energy: 45,
-    energyLabel: "Influence Impact",
-  },
-  {
-    id: 5,
-    title: "Comp Risk",
-    date: "Comp Risk",
-    content: "Three critical threat identified with mitigation paths created, one significant opportunity identified to ghost competitors",
-    category: "Execution",
-    icon: Rocket,
-    relatedIds: [4],
-    status: "analysed" as const,
-    energy: -7,
-    energyLabel: "Risk Of No Action",
-  },
-]
 
 const logos = [
   {
