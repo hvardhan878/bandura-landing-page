@@ -37,7 +37,7 @@ export default function ShowcasePage() {
 
       {/* Interactive Demo */}
       <section className="px-4 sm:px-8 pb-24 max-w-7xl mx-auto">
-        <div className="rounded-2xl border border-white/10 overflow-hidden shadow-2xl shadow-purple-500/5">
+        <div className="rounded-2xl border border-white/5 overflow-hidden">
           <BanduraNetwork />
         </div>
       </section>
