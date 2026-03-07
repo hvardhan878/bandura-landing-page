@@ -427,8 +427,13 @@ function PreviewPopup({ node, onClose }) {
 }
 
 // ─── MAIN COMPONENT ──────────────────────────────────────────────────────────
-export default function BanduraNetwork() {
+export default function BanduraNetwork({ onPhaseChange } = {}) {
   const [phase, setPhase] = useState("pre");
+
+  const updatePhase = useCallback((p) => {
+    setPhase(p);
+    onPhaseChange?.(p);
+  }, [onPhaseChange]);
   const [visibleNodes, setVisibleNodes] = useState(new Set());
   const [nStates, setNStates] = useState(Object.fromEntries(NODES.map(n => [n.id, "dormant"])));
   const [litEdges, setLitEdges] = useState(new Set());
@@ -466,7 +471,7 @@ export default function BanduraNetwork() {
 
     const totalMs = steps[steps.length - 1][0] + pulseDuration + 400;
     const tEnd = setTimeout(() => {
-      if (isCreate) setPhase("created");
+      if (isCreate) updatePhase("created");
       setActiveTrigger(null);
     }, totalMs);
     timers.current.push(tEnd);
@@ -474,7 +479,7 @@ export default function BanduraNetwork() {
 
   const handleSend = () => {
     if (phase !== "pre") return;
-    setPhase("running");
+    updatePhase("running");
     runSeq("create", true);
   };
 
@@ -514,7 +519,7 @@ export default function BanduraNetwork() {
   const openNodeData = openNode ? NODES.find(n => n.id === openNode) : null;
 
   return (
-    <div style={{ fontFamily: "'DM Sans', system-ui, sans-serif", background: "#0a0a0a", minHeight: "100vh", padding: "24px 20px" }}>
+    <div style={{ fontFamily: "'DM Sans', system-ui, sans-serif", background: "#0a0a0a", padding: "24px 20px" }}>
       <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
       <div style={{ maxWidth: 820, margin: "0 auto" }}>

@@ -6,22 +6,22 @@ import {
   ReferenceLine,
 } from "recharts";
 
-// ─── Colours (Bandura style guide) ──────────────────────────────────────────
+// ─── Colours (dark theme matching site) ─────────────────────────────────────
 const C = {
-  mint: "#E1EDE6",
-  mintDark: "#C8DDD0",
+  mint: "#0a0a0a",
+  mintDark: "rgba(255,255,255,0.08)",
   green: "#00CD92",
-  greenDeep: "#27896C",
-  greenLight: "#E6F7F1",
-  text: "#111111",
-  textMid: "#505552",
-  textLight: "#A0B1AA",
-  white: "#FFFFFF",
-  warn: "#C97B1A",
-  warnLight: "#FDF3E3",
-  err: "#B94040",
-  errLight: "#FBEAEA",
-  border: "#C8DDD0",
+  greenDeep: "#00CD92",
+  greenLight: "rgba(0,205,146,0.12)",
+  text: "#f0f0f0",
+  textMid: "#9a9a9a",
+  textLight: "#555555",
+  white: "#111111",
+  warn: "#f59e0b",
+  warnLight: "rgba(245,158,11,0.12)",
+  err: "#ef4444",
+  errLight: "rgba(239,68,68,0.12)",
+  border: "rgba(255,255,255,0.08)",
 };
 
 // ─── Monte Carlo Engine ──────────────────────────────────────────────────────
@@ -221,7 +221,7 @@ const confColor = v => v >= 75 ? C.green : v >= 50 ? C.warn : C.err;
 const confBg = v => v >= 75 ? C.greenLight : v >= 50 ? C.warnLight : C.errLight;
 const confLabel = v => v >= 75 ? "High confidence" : v >= 50 ? "Medium confidence" : "Low confidence";
 const insightColor = t => t === "strength" ? C.green : t === "risk" ? C.err : C.textMid;
-const insightBg = t => t === "strength" ? C.greenLight : t === "risk" ? C.errLight : "#F4F7F5";
+const insightBg = t => t === "strength" ? C.greenLight : t === "risk" ? C.errLight : "rgba(255,255,255,0.05)";
 const insightLabel = t => t === "strength" ? "Strength" : t === "risk" ? "Risk" : "Intel";
 
 function ConfBadge({ value }) {
@@ -261,7 +261,7 @@ function InsightDrawer({ criterion, onClose }) {
   return (
     <div style={{ position: "fixed", inset: 0, zIndex: 200, display: "flex" }}>
       <div onClick={onClose} style={{ flex: 1, background: "rgba(17,17,17,0.4)" }} />
-      <div style={{ width: 500, background: C.white, display: "flex", flexDirection: "column", borderLeft: `1px solid ${C.border}`, overflowY: "auto" }}>
+      <div style={{ width: 500, background: "#161616", display: "flex", flexDirection: "column", borderLeft: `1px solid ${C.border}`, overflowY: "auto" }}>
         {/* Header */}
         <div style={{ padding: "28px 28px 20px", borderBottom: `1px solid ${C.border}` }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 16 }}>
@@ -273,11 +273,11 @@ function InsightDrawer({ criterion, onClose }) {
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
             <div style={{ background: C.greenLight, borderRadius: 10, padding: "14px 16px" }}>
-              <div style={{ fontSize: 10, fontWeight: 600, color: C.greenDeep, textTransform: "uppercase", letterSpacing: 0.8, marginBottom: 4 }}>Our score</div>
-              <div style={{ fontSize: 28, fontWeight: 700, color: C.greenDeep, lineHeight: 1 }}>{criterion.score}<span style={{ fontSize: 13, fontWeight: 400, color: C.textMid }}>/10</span></div>
+              <div style={{ fontSize: 10, fontWeight: 600, color: C.green, textTransform: "uppercase", letterSpacing: 0.8, marginBottom: 4 }}>Our score</div>
+              <div style={{ fontSize: 28, fontWeight: 700, color: C.green, lineHeight: 1 }}>{criterion.score}<span style={{ fontSize: 13, fontWeight: 400, color: C.textMid }}>/10</span></div>
               <div style={{ marginTop: 8 }}><ConfBadge value={criterion.scoreConfidence} /></div>
             </div>
-            <div style={{ background: "#F4F7F5", borderRadius: 10, padding: "14px 16px" }}>
+            <div style={{ background: "rgba(255,255,255,0.05)", borderRadius: 10, padding: "14px 16px" }}>
               <div style={{ fontSize: 10, fontWeight: 600, color: C.textMid, textTransform: "uppercase", letterSpacing: 0.8, marginBottom: 4 }}>Weight in scoring</div>
               <div style={{ fontSize: 28, fontWeight: 700, color: C.text, lineHeight: 1 }}>{criterion.weight}<span style={{ fontSize: 13, fontWeight: 400, color: C.textMid }}>%</span></div>
               <div style={{ marginTop: 8 }}><ConfBadge value={criterion.weightConfidence} /></div>
@@ -286,7 +286,7 @@ function InsightDrawer({ criterion, onClose }) {
         </div>
 
         {/* Uncertainty explainer */}
-        <div style={{ padding: "20px 28px", borderBottom: `1px solid ${C.border}`, background: "#FAFCFB" }}>
+        <div style={{ padding: "20px 28px", borderBottom: `1px solid ${C.border}`, background: "#0d0d0d" }}>
           <div style={{ fontSize: 11, fontWeight: 600, color: C.textMid, textTransform: "uppercase", letterSpacing: 0.8, marginBottom: 10 }}>How this feeds the simulation</div>
           <div style={{ fontSize: 13, color: C.textMid, lineHeight: 1.65, marginBottom: 12 }}>
             We believe this criterion scores <strong style={{ color: C.text }}>{criterion.score}/10</strong>, but with only{" "}
@@ -400,16 +400,16 @@ export default function BidScoringDashboard() {
   );
 
   return (
-    <div style={{ minHeight: "100vh", background: C.mint, fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif", color: C.text }}>
+    <div style={{ background: C.mint, fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif", color: C.text }}>
       <style>{`
         * { box-sizing: border-box; margin: 0; padding: 0; }
         input[type=range] { appearance: none; height: 3px; border-radius: 2px; outline: none; cursor: pointer; }
-        input[type=range]::-webkit-slider-thumb { appearance: none; width: 14px; height: 14px; border-radius: 50%; background: ${C.green}; cursor: pointer; border: 2px solid white; box-shadow: 0 1px 4px rgba(0,0,0,0.15); }
-        ::-webkit-scrollbar { width: 5px; } ::-webkit-scrollbar-thumb { background: ${C.textLight}; border-radius: 3px; }
+        input[type=range]::-webkit-slider-thumb { appearance: none; width: 14px; height: 14px; border-radius: 50%; background: ${C.green}; cursor: pointer; border: 2px solid #111; box-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+        ::-webkit-scrollbar { width: 5px; } ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
       `}</style>
 
       {/* Tabs */}
-      <div style={{ background: C.white, borderBottom: `1px solid ${C.border}` }}>
+      <div style={{ background: "#111111", borderBottom: `1px solid ${C.border}` }}>
         <div style={{ display: "flex", padding: "0 32px" }}>
           {TAB("matrix", "Capabilities matrix")}
           {TAB("competitors", "Competitor intelligence")}
@@ -464,7 +464,7 @@ export default function BidScoringDashboard() {
                 <div style={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 12, overflow: "hidden" }}>
                   <table style={{ width: "100%", borderCollapse: "collapse" }}>
                     <thead>
-                      <tr style={{ background: "#FAFCFB", borderBottom: `1px solid ${C.border}` }}>
+                      <tr style={{ background: "#161616", borderBottom: `1px solid ${C.border}` }}>
                         {["Criterion", "Our score", "Score confidence", "Weight", "Weight confidence", "Score range"].map(h => (
                           <th key={h} style={{ padding: "10px 16px", fontSize: 11, fontWeight: 600, color: C.textMid, textAlign: "left" }}>{h}</th>
                         ))}
@@ -474,8 +474,8 @@ export default function BidScoringDashboard() {
                       {criteria.map((c, i) => (
                         <tr key={c.id} onClick={() => setSelected(c)}
                           style={{ borderBottom: i < criteria.length - 1 ? `1px solid ${C.border}` : "none", cursor: "pointer" }}
-                          onMouseEnter={e => e.currentTarget.style.background = C.greenLight}
-                          onMouseLeave={e => e.currentTarget.style.background = ""}>
+                          onMouseEnter={e => e.currentTarget.style.background = "rgba(0,205,146,0.07)"}
+                          onMouseLeave={e => e.currentTarget.style.background = "transparent"}>
                           <td style={{ padding: "14px 16px" }}>
                             <div style={{ fontWeight: 600, fontSize: 13, color: C.text }}>{c.name}</div>
                             <div style={{ fontSize: 11, color: C.textLight, marginTop: 2 }}>{c.insights.length} signals →</div>
@@ -504,7 +504,7 @@ export default function BidScoringDashboard() {
                       ))}
                     </tbody>
                   </table>
-                  <div style={{ padding: "9px 16px", background: "#FAFCFB", borderTop: `1px solid ${C.border}`, fontSize: 12, color: totalW !== 100 ? C.err : C.green, fontWeight: 600 }}>
+                  <div style={{ padding: "9px 16px", background: "#161616", borderTop: `1px solid ${C.border}`, fontSize: 12, color: totalW !== 100 ? C.err : C.green, fontWeight: 600 }}>
                     {totalW !== 100 ? `⚠ Weights sum to ${totalW}% — should total 100%` : `✓ Weights sum to 100%`}
                   </div>
                 </div>
@@ -530,14 +530,14 @@ export default function BidScoringDashboard() {
                         </div>
                       ))}
                     </div>
-                    <div style={{ marginTop: 14, padding: "8px 12px", background: C.mintDark, borderRadius: 6, fontSize: 11, color: C.textMid }}>
+                    <div style={{ marginTop: 14, padding: "8px 12px", background: "rgba(255,255,255,0.05)", borderRadius: 6, fontSize: 11, color: C.textMid }}>
                       Set by Bandura from tender documentation
                     </div>
                   </div>
                 </div>
 
                 <button onClick={runSim} disabled={running} style={{
-                  background: running ? C.textLight : C.green, color: C.white, border: "none",
+                  background: running ? "#333" : C.green, color: "#000", border: "none",
                   borderRadius: 999, padding: "13px 20px", fontSize: 13, fontWeight: 700, cursor: running ? "not-allowed" : "pointer",
                   boxShadow: running ? "none" : "0 2px 14px rgba(0,205,146,0.3)", transition: "all 0.2s",
                 }}>
@@ -582,7 +582,7 @@ export default function BidScoringDashboard() {
                 </div>
                 <table style={{ width: "100%", borderCollapse: "collapse" }}>
                   <thead>
-                    <tr style={{ background: "#FAFCFB", borderBottom: `1px solid ${C.border}` }}>
+                    <tr style={{ background: "#161616", borderBottom: `1px solid ${C.border}` }}>
                       {["Criterion", "Our score", "Their estimated score", "Intel confidence", "Gap"].map(h => (
                         <th key={h} style={{ padding: "8px 16px", fontSize: 11, fontWeight: 600, color: C.textMid, textAlign: "left" }}>{h}</th>
                       ))}
@@ -599,7 +599,7 @@ export default function BidScoringDashboard() {
                           <td style={{ padding: "12px 16px", fontSize: 14, fontWeight: 700, color: C.textMid }}>{cs.score}</td>
                           <td style={{ padding: "12px 16px" }}><ConfBadge value={cs.confidence} /></td>
                           <td style={{ padding: "12px 16px" }}>
-                            <span style={{ fontSize: 12, fontWeight: 700, padding: "3px 10px", borderRadius: 999, background: diff > 0.5 ? C.greenLight : diff < -0.5 ? C.errLight : "#F4F7F5", color: diff > 0.5 ? C.greenDeep : diff < -0.5 ? C.err : C.textMid }}>
+                            <span style={{ fontSize: 12, fontWeight: 700, padding: "3px 10px", borderRadius: 999, background: diff > 0.5 ? C.greenLight : diff < -0.5 ? C.errLight : "rgba(255,255,255,0.06)", color: diff > 0.5 ? C.green : diff < -0.5 ? C.err : C.textMid }}>
                               {diff > 0 ? `+${diff.toFixed(1)}` : diff.toFixed(1)} us
                             </span>
                           </td>
@@ -620,7 +620,7 @@ export default function BidScoringDashboard() {
               <div style={{ textAlign: "center", padding: "80px 0" }}>
                 <div style={{ fontSize: 18, fontWeight: 700, color: C.textMid, marginBottom: 8 }}>No simulation run yet</div>
                 <div style={{ fontSize: 13, color: C.textLight, marginBottom: 24 }}>Go to the capabilities matrix and run a simulation first.</div>
-                <button onClick={() => setTab("matrix")} style={{ background: C.green, color: C.white, border: "none", borderRadius: 999, padding: "12px 24px", fontSize: 13, fontWeight: 700, cursor: "pointer" }}>
+                <button onClick={() => setTab("matrix")} style={{ background: C.green, color: "#000", border: "none", borderRadius: 999, padding: "12px 24px", fontSize: 13, fontWeight: 700, cursor: "pointer" }}>
                   Go to capabilities matrix →
                 </button>
               </div>
@@ -683,7 +683,7 @@ export default function BidScoringDashboard() {
                       <CartesianGrid strokeDasharray="3 3" stroke={C.mintDark} />
                       <XAxis dataKey="score" tick={{ fill: C.textLight, fontSize: 10 }} />
                       <YAxis tick={{ fill: C.textLight, fontSize: 10 }} />
-                      <Tooltip contentStyle={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 8, fontSize: 12 }} formatter={v => [v.toLocaleString(), "scenarios"]} labelFormatter={v => `Score: ${v}`} />
+                      <Tooltip contentStyle={{ background: "#1a1a1a", border: `1px solid ${C.border}`, borderRadius: 8, fontSize: 12, color: C.text }} formatter={v => [v.toLocaleString(), "scenarios"]} labelFormatter={v => `Score: ${v}`} />
                       <ReferenceLine x={p10} stroke={C.err} strokeWidth={1.5} strokeDasharray="4 2" />
                       <ReferenceLine x={p50} stroke={C.warn} strokeWidth={1.5} strokeDasharray="4 2" />
                       <ReferenceLine x={p90} stroke={C.green} strokeWidth={1.5} strokeDasharray="4 2" />
@@ -702,7 +702,7 @@ export default function BidScoringDashboard() {
                         <CartesianGrid strokeDasharray="3 3" stroke={C.mintDark} />
                         <XAxis dataKey="pricek" tick={{ fill: C.textLight, fontSize: 10 }} angle={-25} textAnchor="end" height={40} />
                         <YAxis tick={{ fill: C.textLight, fontSize: 10 }} domain={[0, 100]} unit="%" />
-                        <Tooltip contentStyle={{ background: C.white, border: `1px solid ${C.border}`, borderRadius: 8, fontSize: 12 }} formatter={v => [`${v}%`, "Win probability"]} />
+                        <Tooltip contentStyle={{ background: "#1a1a1a", border: `1px solid ${C.border}`, borderRadius: 8, fontSize: 12, color: C.text }} formatter={v => [`${v}%`, "Win probability"]} />
                         <ReferenceLine y={50} stroke={C.textLight} strokeDasharray="3 3" label={{ value: "50%", fill: C.textLight, fontSize: 10, position: "insideLeft" }} />
                         <ReferenceLine x={`£${Math.round(yourPrice / 1000)}k`} stroke={C.green} strokeWidth={1.5} strokeDasharray="4 2" label={{ value: "Your price", fill: C.greenDeep, fontSize: 10 }} />
                         <Line type="monotone" dataKey="winPct" stroke={C.green} strokeWidth={2.5} dot={{ fill: C.green, r: 3, strokeWidth: 0 }} />
