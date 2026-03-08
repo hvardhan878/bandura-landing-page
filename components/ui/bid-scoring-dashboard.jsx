@@ -5,6 +5,7 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   ReferenceLine,
 } from "recharts";
+import { CapturePlan, PriceToWin, CompetitiveReadiness, WhatItTakes, INVESTMENTS, COMPOSITIONS, BASE_WIN } from "@/components/ui/bandura-dashboard";
 
 // ─── Colours (dark theme matching site) ─────────────────────────────────────
 const C = {
@@ -340,6 +341,16 @@ export default function BidScoringDashboard() {
   const competitors = SYSTEM_COMPETITORS;
   const lowConf = criteria.filter(c => c.scoreConfidence < 60 || c.weightConfidence < 60);
 
+  // Shared investment state — drives both Competitive Readiness and Pursuit Opportunities
+  const [enabledInvestments, setEnabledInvestments] = useState(
+    INVESTMENTS.reduce((acc, inv) => ({ ...acc, [inv.id]: true }), {})
+  );
+  const totalInvestmentImpact = INVESTMENTS.filter(i => enabledInvestments[i.id]).reduce((a, b) => a + b.winImpact, 0);
+  const winLikelihood = Math.min(BASE_WIN + totalInvestmentImpact, 97);
+
+  // Shared composition state — drives both Capture Plan and Price to Win
+  const [activeComposition, setActiveComposition] = useState("full");
+
   const runSim = useCallback(() => {
     setRunning(true);
     setProgress(0);
@@ -406,14 +417,25 @@ export default function BidScoringDashboard() {
         input[type=range] { appearance: none; height: 3px; border-radius: 2px; outline: none; cursor: pointer; }
         input[type=range]::-webkit-slider-thumb { appearance: none; width: 14px; height: 14px; border-radius: 50%; background: ${C.green}; cursor: pointer; border: 2px solid #111; box-shadow: 0 1px 4px rgba(0,0,0,0.5); }
         ::-webkit-scrollbar { width: 5px; } ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+        .bd-section { margin-bottom: 56px; }
+        .bd-two-col { display: grid; grid-template-columns: 1fr; gap: 16px; }
+        @media (min-width: 768px) { .bd-two-col { grid-template-columns: 1fr 240px; } }
+        .bd-sidebar { }
+        @media (min-width: 768px) { .bd-sidebar { position: sticky; top: 100px; } }
+        .bd-comp-split { display: grid; grid-template-columns: 1fr; gap: 16px; }
+        @media (min-width: 768px) { .bd-comp-split { grid-template-columns: 1fr 300px; } }
       `}</style>
 
       {/* Tabs */}
       <div style={{ background: "#111111", borderBottom: `1px solid ${C.border}` }}>
-        <div style={{ display: "flex", padding: "0 32px" }}>
+        <div style={{ display: "flex", padding: "0 32px", overflowX: "auto" }}>
+          {TAB("strategy", "Capture strategy")}
+          {TAB("pricing", "Optimal pricing")}
           {TAB("matrix", "Capabilities matrix")}
           {TAB("competitors", "Competitor intelligence")}
           {TAB("results", "Scoring simulation")}
+          {TAB("scenarios", "Scenario modelling")}
+          {TAB("pursuit", "Pursuit opportunities")}
         </div>
       </div>
 
@@ -738,6 +760,47 @@ export default function BidScoringDashboard() {
           </div>
         )}
       </div>
+
+        {/* ── CAPTURE STRATEGY ── */}
+        {tab === "strategy" && (
+          <div style={{ padding: "28px 32px", maxWidth: 1280, margin: "0 auto" }}>
+            <CapturePlan
+              winLikelihood={winLikelihood}
+              activeComposition={activeComposition}
+              productMode={true}
+            />
+          </div>
+        )}
+
+        {/* ── OPTIMAL PRICING ── */}
+        {tab === "pricing" && (
+          <div style={{ padding: "28px 32px", maxWidth: 1280, margin: "0 auto" }}>
+            <PriceToWin
+              activeComposition={activeComposition}
+              setActiveComposition={setActiveComposition}
+              productMode={true}
+            />
+          </div>
+        )}
+
+        {/* ── SCENARIOS ── */}
+        {tab === "scenarios" && (
+          <div style={{ padding: "28px 32px", maxWidth: 1280, margin: "0 auto" }}>
+            <CompetitiveReadiness enabledInvestments={enabledInvestments} productMode={true} />
+          </div>
+        )}
+
+        {/* ── PURSUIT ── */}
+        {tab === "pursuit" && (
+          <div style={{ padding: "28px 32px", maxWidth: 1280, margin: "0 auto" }}>
+            <WhatItTakes
+              enabledInvestments={enabledInvestments}
+              setEnabledInvestments={setEnabledInvestments}
+              winLikelihood={winLikelihood}
+              productMode={true}
+            />
+          </div>
+        )}
 
       {selected && <InsightDrawer criterion={selected} onClose={() => setSelected(null)} />}
     </div>

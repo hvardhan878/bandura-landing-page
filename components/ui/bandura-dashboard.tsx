@@ -13,7 +13,7 @@ import {
   ResponsiveContainer,
 } from "recharts"
 
-const BASE_WIN = 31
+export const BASE_WIN = 31
 const G = {
   green: "#00CD92",
   deepGreen: "#27896C",
@@ -40,7 +40,7 @@ function useIsMobile() {
   return isMobile
 }
 
-const INVESTMENTS = [
+export const INVESTMENTS = [
   { id: "stakeholder", category: "Relationship Building", title: "SRO & Technical Architect engagement", description: "Direct engagement with the SRO and Technical Architect in the next 8 weeks to shape requirements.", status: "Not started", effort: "High", winImpact: 14, scenarioLinks: ["dxc_incumbent"], actions: ["Arrange working group participation with HMRC Digital", "Commission white paper aligned to SRO's stated priorities", "Brief Technical Architect on platform capabilities"] },
   { id: "requirements", category: "Positioning", title: "Requirements shaping & specification influence", description: "Influence the ITT specification to reflect our delivery methodology and cloud-native approach.", status: "Not started", effort: "High", winImpact: 11, scenarioLinks: ["dxc_tech"], actions: ["Submit response to pre-market engagement notice", "Propose evaluation criteria weighting", "Seed cloud-native architecture requirement language"] },
   { id: "partners", category: "Internal Assembly", title: "Strategic partner & SME assembly", description: "Lock in key subcontractors and SME partners before ITT drops.", status: "In progress", effort: "Medium", winImpact: 8, scenarioLinks: ["atos_partner", "capita_partner"], actions: ["Contract preferred SME partners on teaming agreements", "Confirm hyperscaler partnership for cloud delivery", "Align partner capability narratives with win themes"] },
@@ -70,7 +70,7 @@ const BUCKETS = [
   { id: "unmitigatable", label: "Unmitigatable", color: G.red, bgColor: "rgba(220,60,60,0.06)", borderColor: "rgba(220,60,60,0.15)", textColor: G.red, icon: "✕", implication: "Structural disadvantages — absorb and plan around." },
 ]
 
-const COMPOSITIONS = [
+export const COMPOSITIONS = [
   { id: "minimal", label: "Minimal Viable", description: "Core delivery only, lean team, standard SLAs", color: G.textMuted, data: [{ price: 25, win: 74 }, { price: 30, win: 69 }, { price: 35, win: 62 }, { price: 40, win: 53 }, { price: 45, win: 42 }, { price: 50, win: 31 }, { price: 55, win: 21 }, { price: 60, win: 13 }, { price: 65, win: 7 }, { price: 70, win: 3 }, { price: 75, win: 1 }], sweetSpot: { price: 27, win: 74 }, sweetSpotRange: [25, 32] },
   { id: "hybrid", label: "Hybrid Partner", description: "Blended delivery with strategic subcontractors", color: G.deepGreen, data: [{ price: 25, win: 55 }, { price: 30, win: 66 }, { price: 35, win: 74 }, { price: 40, win: 69 }, { price: 45, win: 59 }, { price: 50, win: 47 }, { price: 55, win: 34 }, { price: 60, win: 21 }, { price: 65, win: 11 }, { price: 70, win: 5 }, { price: 75, win: 2 }], sweetSpot: { price: 33, win: 74 }, sweetSpotRange: [30, 38] },
   { id: "full", label: "Full Managed", description: "End-to-end ownership, premium team, enhanced SLAs", color: G.green, data: [{ price: 25, win: 36 }, { price: 30, win: 51 }, { price: 35, win: 65 }, { price: 40, win: 71 }, { price: 45, win: 62 }, { price: 50, win: 50 }, { price: 55, win: 37 }, { price: 60, win: 25 }, { price: 65, win: 14 }, { price: 70, win: 6 }, { price: 75, win: 2 }], sweetSpot: { price: 39, win: 71 }, sweetSpotRange: [35, 44] },
@@ -134,7 +134,7 @@ function DarkCard({ children, style = {} }: { children: React.ReactNode; style?:
 }
 
 // ─── PANEL 1: CAPTURE PLAN ────────────────────────────────────────────────────
-function CapturePlan({ winLikelihood, activeComposition }: { winLikelihood: number; activeComposition: string }) {
+export function CapturePlan({ winLikelihood, activeComposition, productMode = false }: { winLikelihood: number; activeComposition: string; productMode?: boolean }) {
   const isMobile = useIsMobile()
   const [hoveredSection, setHoveredSection] = useState<string | null>(null)
   const [flashedSections, setFlashedSections] = useState<Record<string, number>>({})
@@ -169,13 +169,15 @@ function CapturePlan({ winLikelihood, activeComposition }: { winLikelihood: numb
 
   return (
     <section className="bd-section">
-      <div style={{ marginBottom: 24 }}>
-        <SectionLabel color={G.green}>01 — Live Capture Plan</SectionLabel>
-        <SectionHeading>Your strategy, built and updated live.</SectionHeading>
-        <p style={{ fontSize: 14, color: G.textSecondary, maxWidth: 480, lineHeight: 1.65, margin: 0 }}>
-          Every section is grounded in Bandura&apos;s analysis. Hover any section to see what built it.
-        </p>
-      </div>
+      {!productMode && (
+        <div style={{ marginBottom: 24 }}>
+          <SectionLabel color={G.green}>01 — Live Capture Plan</SectionLabel>
+          <SectionHeading>Your strategy, built and updated live.</SectionHeading>
+          <p style={{ fontSize: 14, color: G.textSecondary, maxWidth: 480, lineHeight: 1.65, margin: 0 }}>
+            Every section is grounded in Bandura&apos;s analysis. Hover any section to see what built it.
+          </p>
+        </div>
+      )}
 
       <div className="bd-two-col">
         {/* Left: sections */}
@@ -271,7 +273,7 @@ function CapturePlan({ winLikelihood, activeComposition }: { winLikelihood: numb
 }
 
 // ─── PANEL 2: PRICE TO WIN ────────────────────────────────────────────────────
-function PriceToWin({ activeComposition, setActiveComposition }: { activeComposition: string; setActiveComposition: (id: string) => void }) {
+export function PriceToWin({ activeComposition, setActiveComposition, productMode = false }: { activeComposition: string; setActiveComposition: (id: string) => void; productMode?: boolean }) {
   const [animKey, setAnimKey] = useState(0)
   const composition = COMPOSITIONS.find(c => c.id === activeComposition)!
   const handleSelect = (id: string) => { setActiveComposition(id); setAnimKey(k => k + 1) }
@@ -289,13 +291,15 @@ function PriceToWin({ activeComposition, setActiveComposition }: { activeComposi
 
   return (
     <section className="bd-section">
-      <div style={{ marginBottom: 24 }}>
-        <SectionLabel color={G.green}>02 — Price-to-Win Modelling</SectionLabel>
-        <SectionHeading>Find your optimal price point.</SectionHeading>
-        <p style={{ fontSize: 14, color: G.textSecondary, maxWidth: 480, lineHeight: 1.65, margin: 0 }}>
-          Modelled across solution compositions and competitor pricing.
-        </p>
-      </div>
+      {!productMode && (
+        <div style={{ marginBottom: 24 }}>
+          <SectionLabel color={G.green}>02 — Price-to-Win Modelling</SectionLabel>
+          <SectionHeading>Find your optimal price point.</SectionHeading>
+          <p style={{ fontSize: 14, color: G.textSecondary, maxWidth: 480, lineHeight: 1.65, margin: 0 }}>
+            Modelled across solution compositions and competitor pricing.
+          </p>
+        </div>
+      )}
 
       {/* Composition selector */}
       <div style={{ display: "flex", gap: 8, marginBottom: 20, flexWrap: "wrap" }}>
@@ -369,7 +373,7 @@ function PriceToWin({ activeComposition, setActiveComposition }: { activeComposi
 }
 
 // ─── PANEL 3: COMPETITIVE READINESS ──────────────────────────────────────────
-function CompetitiveReadiness({ enabledInvestments }: { enabledInvestments: Record<string, boolean> }) {
+export function CompetitiveReadiness({ enabledInvestments, productMode = false }: { enabledInvestments: Record<string, boolean>; productMode?: boolean }) {
   const isMobile = useIsMobile()
   const [expandedBucket, setExpandedBucket] = useState<string | null>("investment")
   const [selectedScenario, setSelectedScenario] = useState<string | null>(null)
@@ -384,13 +388,15 @@ function CompetitiveReadiness({ enabledInvestments }: { enabledInvestments: Reco
 
   return (
     <section className="bd-section">
-      <div style={{ marginBottom: 24 }}>
-        <SectionLabel color={G.deepGreen}>03 — Competitive Readiness</SectionLabel>
-        <SectionHeading>Scenario Modelling</SectionHeading>
-        <p style={{ fontSize: 14, color: G.textSecondary, maxWidth: 480, lineHeight: 1.65, margin: 0 }}>
-          Every move each competitor could make and whether you can mitigate it.
-        </p>
-      </div>
+      {!productMode && (
+        <div style={{ marginBottom: 24 }}>
+          <SectionLabel color={G.deepGreen}>03 — Competitive Readiness</SectionLabel>
+          <SectionHeading>Scenario Modelling</SectionHeading>
+          <p style={{ fontSize: 14, color: G.textSecondary, maxWidth: 480, lineHeight: 1.65, margin: 0 }}>
+            Every move each competitor could make and whether you can mitigate it.
+          </p>
+        </div>
+      )}
 
       {/* Legend */}
       <div style={{ display: "flex", gap: 8, marginBottom: 16, flexWrap: "wrap", alignItems: "center" }}>
@@ -572,7 +578,7 @@ function CompetitiveReadiness({ enabledInvestments }: { enabledInvestments: Reco
 }
 
 // ─── PANEL 4: WHAT IT TAKES ───────────────────────────────────────────────────
-function WhatItTakes({ enabledInvestments, setEnabledInvestments, winLikelihood }: { enabledInvestments: Record<string, boolean>; setEnabledInvestments: React.Dispatch<React.SetStateAction<Record<string, boolean>>>; winLikelihood: number }) {
+export function WhatItTakes({ enabledInvestments, setEnabledInvestments, winLikelihood, productMode = false }: { enabledInvestments: Record<string, boolean>; setEnabledInvestments: React.Dispatch<React.SetStateAction<Record<string, boolean>>>; winLikelihood: number; productMode?: boolean }) {
   const [expanded, setExpanded] = useState<string | null>(null)
   const totalImpact = INVESTMENTS.filter(i => enabledInvestments[i.id]).reduce((a, b) => a + b.winImpact, 0)
   const pct = Math.min(BASE_WIN + totalImpact, 97)
@@ -585,13 +591,15 @@ function WhatItTakes({ enabledInvestments, setEnabledInvestments, winLikelihood 
 
   return (
     <section className="bd-section" style={{ marginBottom: 0 }}>
-      <div style={{ marginBottom: 24 }}>
-        <SectionLabel color={G.amber}>04 — What It Will Take to Win</SectionLabel>
-        <SectionHeading>Pursuit Opportunities</SectionHeading>
-        <p style={{ fontSize: 14, color: G.textSecondary, maxWidth: 480, lineHeight: 1.65, margin: 0 }}>
-          Toggle actions on and off to see impact on your win likelihood.
-        </p>
-      </div>
+      {!productMode && (
+        <div style={{ marginBottom: 24 }}>
+          <SectionLabel color={G.amber}>04 — What It Will Take to Win</SectionLabel>
+          <SectionHeading>Pursuit Opportunities</SectionHeading>
+          <p style={{ fontSize: 14, color: G.textSecondary, maxWidth: 480, lineHeight: 1.65, margin: 0 }}>
+            Toggle actions on and off to see impact on your win likelihood.
+          </p>
+        </div>
+      )}
 
       <div className="bd-two-col">
         <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
