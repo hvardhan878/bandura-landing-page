@@ -31,7 +31,6 @@ export default function DemoPage() {
     fontWeight: 500,
     cursor: locked ? "not-allowed" : "pointer",
     color: activeTab === id ? "#f0f0f0" : locked ? "#2a2a2a" : "#666",
-    borderBottom: activeTab === id ? "2px solid #00CD92" : "2px solid transparent",
     transition: "all 0.2s",
     whiteSpace: "nowrap" as const,
     userSelect: "none" as const,
