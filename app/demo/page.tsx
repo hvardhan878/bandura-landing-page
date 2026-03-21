@@ -9,7 +9,7 @@ import BidScoringDashboard from "@/components/ui/bid-scoring-dashboard"
 type Phase = "pre" | "running" | "created"
 type Tab = "intelligence" | "network" | "scoring"
 
-export default function ScoringPage() {
+export default function DemoPage() {
   const [phase, setPhase] = useState<Phase>("pre")
   const [activeTab, setActiveTab] = useState<Tab>("intelligence")
   const [scoringUnlocked, setScoringUnlocked] = useState(false)
@@ -35,6 +35,9 @@ export default function ScoringPage() {
     transition: "all 0.2s",
     whiteSpace: "nowrap" as const,
     userSelect: "none" as const,
+    background: "none",
+    border: "none",
+    borderBottom: activeTab === id ? "2px solid #00CD92" : "2px solid transparent",
   })
 
   return (
@@ -132,17 +135,12 @@ export default function ScoringPage() {
       <div style={{ flex: 1, overflow: "auto", position: "relative" }}>
 
         {/* Intelligence tab */}
-        <div style={{
-          display: activeTab === "intelligence" ? "block" : "none",
-          padding: "32px 24px",
-        }}>
+        <div style={{ display: activeTab === "intelligence" ? "block" : "none", padding: "32px 24px" }}>
           <BanduraIntelligenceDemo />
         </div>
 
         {/* Capture Plan tab */}
-        <div style={{
-          display: activeTab === "network" ? "block" : "none",
-        }}>
+        <div style={{ display: activeTab === "network" ? "block" : "none" }}>
           <BanduraNetwork onPhaseChange={handlePhaseChange} />
         </div>
 
